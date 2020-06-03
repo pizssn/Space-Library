@@ -1,30 +1,12 @@
-# sl-vue
+## sl-vue
+----
+**这里是采用的VUE制作的Space-Library的前端文件夹。**
 
-> A Vue.js project
+==注意：在使用之前，你需要安装安装 Vue CLI。==
+&emsp;&emsp;因为需要使用 npm 安装 Vue CLI，而 npm 是集成在 Node.js 中的，所以第一步我们需要安装 Node.js，访问官网 [https://nodejs.org/en/](https://nodejs.org/en/)，首页即可下载。
 
-## Build Setup
+之后，使用 `npm install -g vue-cli` 安装脚手架。
 
-``` bash
-# install dependencies
-npm install
+在前端项目文件夹下，调出cmd后输入`npm run dev`
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+在浏览器输入localhost:8080即可
