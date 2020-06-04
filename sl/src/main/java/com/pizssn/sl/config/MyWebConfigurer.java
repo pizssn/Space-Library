@@ -1,6 +1,8 @@
 package com.pizssn.sl.config;
 
+import com.pizssn.sl.interceptor.LoginInterceptor;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -8,11 +10,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MyWebConfigurer implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        //所有请求都允许跨域
         registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*")
+                .allowCredentials(true)
+                .allowedOrigins("http://localhost:8080")
+                .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
                 .allowedHeaders("*");
+    }
+
+    @Bean
+    public LoginInterceptor getLoginIntercepter() {
+        return new LoginInterceptor();
     }
 
     @Override
