@@ -3,11 +3,11 @@
   <el-form class="login-container" label-position="left"
            label-width="0px">
     <h3 class="login_title">系统登录</h3>
-    <el-form-item>
+    <el-form-item  prop="username">
       <el-input type="text" v-model="loginForm.username"
                 auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
-    <el-form-item>
+    <el-form-item prop="password">
       <el-input type="password" v-model="loginForm.password"
                 auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
@@ -22,49 +22,45 @@
 </template>
 
 <script>
-
-export default {
-  name: 'Login',
-  data () {
-    return {
-      rules: {
-        username: [{required: true, message: '用户名不能为空', trigger: 'blur'}],
-        password: [{required: true, message: '密码不能为空', trigger: 'blur'}]
-      },
-      checked: true,
-      loginForm: {
-        username: '',
-        password: ''
-      },
-      responseResult: []
-    }
-  },
-  methods: {
-    login () {
-      var _this = this
-      console.log(this.$store.state)
-      this.$axios
-        .post('/login', {
-          username: this.loginForm.username,
-          password: this.loginForm.password
-        })
-        .then(successResponse => {
-          if (successResponse.data.code === 200) {
-            // var data = this.loginForm
-            _this.$store.commit('login', _this.loginForm)
-            var path = this.$route.query.redirect
-            this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
-          } else {
-            this.$alert(successResponse.data.message, '提示', {
-              confirmButtonText: '确定'
+  export default {
+    name: 'Login',
+    data () {
+      return {
+        loginForm: {
+          username: '',
+          password: ''
+        },
+        responseResult: []
+      }
+    },
+    methods: {
+      login() {
+        var _this = this
+        if (_this.loginForm.username && _this.loginForm.password) {
+          console.log(this.$store.state)
+          this.$axios
+            .post('/login', {
+              username: this.loginForm.username,
+              password: this.loginForm.password
             })
-          }
-        })
-        .catch(failResponse => {
-        })
+            .then(successResponse => {
+              if (successResponse.data.code === 200) {
+                // var data = this.loginForm
+                _this.$store.commit('login', _this.loginForm)
+                var path = this.$route.query.redirect
+                this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
+              } else {
+                this.$alert(successResponse.data.message, '提示', {
+                  confirmButtonText: '确定'
+                })
+              }
+            })
+            .catch(failResponse => {
+            })
+        }
+      }
     }
   }
-}
 </script>
 
 <style>

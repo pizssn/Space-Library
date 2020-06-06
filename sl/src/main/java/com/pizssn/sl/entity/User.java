@@ -19,8 +19,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//主键策略
     @Column(name = "id")
-    int id;
-    String username;
-    String password;
+    private int id;
+    private String username;
+    private String password;
     private String salt;
+    private String name;
+    private String phone;
+    private String email;
 }

@@ -17,11 +17,6 @@ public class MyWebConfigurer implements WebMvcConfigurer {
                 .allowedHeaders("*");
     }
 
-    @Bean
-    public LoginInterceptor getLoginIntercepter() {
-        return new LoginInterceptor();
-    }
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/api/file/**").addResourceLocations("file:" + "d:/Program Files/Code/SpaceLibrary/img/");//这里是相关图片存放的地址

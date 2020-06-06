@@ -13,6 +13,9 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @Configuration
 public class ShiroConfiguration {
 
@@ -54,6 +57,12 @@ public class ShiroConfiguration {
         // Shiro的核心安全接口,这个属性是必须的
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
+        //设置shiro拦截器
+        Map<String, String> fiterMap = new LinkedHashMap<>();
+        fiterMap.put("/a/**", "authc");
+        fiterMap.put("/api/register", "anon");
+        fiterMap.put("/api/login", "anon");
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(fiterMap);
         return shiroFilterFactoryBean;
     }
 

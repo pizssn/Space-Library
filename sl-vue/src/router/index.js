@@ -5,6 +5,7 @@ import Login from '../components/Login'
 import Home from '../components/Home'
 import LibraryIndex from '../components/library/LibraryIndex'
 import Register from '../components/Register'
+import self from '../components/self/Self'
 
 Vue.use(Router)
 
@@ -32,6 +33,14 @@ export default new Router({
           meta: {
             requireAuth: true
           }
+        },
+        {
+          path: '/admin',
+          name: 'self',
+          component: self,
+          meta: {
+            requireAuth: true
+          }
         }
       ]
     },
@@ -44,6 +53,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/',
+      name: 'Login',
+      component: Login
     }
   ]
 })

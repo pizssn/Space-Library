@@ -66,7 +66,7 @@ public class LoginController {
     }
 
     @ResponseBody
-    @GetMapping("api/logout")
+    @GetMapping("api/a/logout")
     public Result logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
@@ -78,5 +78,19 @@ public class LoginController {
     @GetMapping(value = "api/authentication")
     public String authentication(){
         return "身份认证成功";
+    }
+    @GetMapping("/api/a/info")
+    @ResponseBody
+    public User select() throws Exception {
+        String s = SecurityUtils.getSubject().getPrincipal().toString();
+        User user = userService.findByUsername(s);
+        return user;
+    }
+
+    @PostMapping("/api/a/info")
+    @ResponseBody
+    public User modify(@RequestBody User user){
+        userService.add(user);
+        return user;
     }
 }
